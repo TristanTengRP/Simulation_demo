@@ -3,7 +3,7 @@ clear all;
 tic;
 SNR_dB=[-20:2:10]; 
 simulations=3000;
-thresh_gau=[1:1:20]; % thresh of authentication 5:0.2:15 for ROC curve   
+thresh_gau=[1:1:20]; 
 thresh_lap=[0:0.1:2];
 thresh_MC=[1:1:20];
 l_snr=length(SNR_dB);
@@ -17,13 +17,13 @@ PD_lap_DOA_sim=zeros(l_snr,l_thresh_lap);
 PF_MC_sim=zeros(l_snr,l_thresh_MC);
 PD_MC_sim=zeros(l_snr,l_thresh_MC);
 
-%% Simulation and theoretical analysis of scheme using Gaussian DOA
-DOA_est_E=load("Eve_Gaussian_5000_52.mat","theta_est","theta_true"); %load estimation of DOA under SNR=[0,30]dB
+%% Simulation and theoretical analysis of scheme using Gaussian AoA
+DOA_est_E=load("Eve_Gaussian_5000_52.mat","theta_est","theta_true");
 DOA_est_A=load("Alice_Gaussian_3000.mat","theta_est","theta_true");
 
 
-var_DOA_A = reshape(var(DOA_est_A.theta_est),l_snr,1);% The DOA variance of Alice;
-var_DOA_E = reshape(var(DOA_est_E.theta_est(:,:,1:16)),l_snr,1);% The DOA variance of Eve;
+var_DOA_A = reshape(var(DOA_est_A.theta_est),l_snr,1);
+var_DOA_E = reshape(var(DOA_est_E.theta_est(:,:,1:16)),l_snr,1);
 mean_DOA_A=[55];% mean of DOA, Alice:[55]
 mean_DOA_E=[52];% mean of DOA, Eve:[52]
 
@@ -56,7 +56,7 @@ lamda_1_theta = zeros(l_snr,1);
 
 for i=1:l_snr
     for j=1:l_thresh_gau
-        lamda_1_theta(i) = ((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))).'*((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))); % H1条件下的中心尺度参数
+        lamda_1_theta(i) = ((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))).'*((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))); 
         PD_DOA_Theo(i,j)=1-ncx2cdf(2.*var_DOA_c(i)./var_DOA_E(i).*thresh_gau(j),length(mean_DOA_A),lamda_1_theta(i));
     end
 end
@@ -86,12 +86,12 @@ PF_DOA_Theo = zeros(l_snr,l_thresh_gau);
 lamda_0_theta = zeros(l_snr,1);
 for i=1:l_snr
     for j=1:l_thresh_gau
-        lamda_0_theta(i) = ((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))).'*((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))); % H1条件下的中心尺度参数
+        lamda_0_theta(i) = ((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))).'*((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))); 
         PF_DOA_Theo(i,j)=1-ncx2cdf(2.*var_DOA_c(i)./var_DOA_A(i).*thresh_gau(j),length(mean_DOA_E),lamda_0_theta(i));
     end
 end
 
-%% Simulation and theoretical analysis of scheme using Laplace DOA
+%% Simulation and theoretical analysis of scheme using Laplace AoA
 DOA_est_E_lap=load("Estimation_date\Eve_Laplace_3000_1.mat","theta_est","theta_true"); 
 DOA_est_A_lap=load("Estimation_date\Alice_Laplace_3000.mat","theta_est","theta_true");
 
@@ -186,8 +186,8 @@ lamda_1_mc = zeros(l_snr,1);
 
 for i=1:l_snr
     for j=1:l_thresh_MC
-        lamda_1_mc(i) = (sqrt(2).*(mean_MC_E-m_MC(i,:)).'./sqrt(var_MC_E(i)))'*(sqrt(2).*(mean_MC_E-m_MC(i,:)).'./sqrt(var_MC_E(i))); % H1条件下的中心尺度参数
-        PD_MC_Theo(i,j)=1-ncx2cdf(2.*var_MC_c(i)./var_MC_E(i).*thresh_MC(j),2*(P-1),lamda_1_mc(i));% 因为MC第一项为1，所以只需比较后P-1项。
+        lamda_1_mc(i) = (sqrt(2).*(mean_MC_E-m_MC(i,:)).'./sqrt(var_MC_E(i)))'*(sqrt(2).*(mean_MC_E-m_MC(i,:)).'./sqrt(var_MC_E(i))); 
+        PD_MC_Theo(i,j)=1-ncx2cdf(2.*var_MC_c(i)./var_MC_E(i).*thresh_MC(j),2*(P-1),lamda_1_mc(i));
     end
 end
 
