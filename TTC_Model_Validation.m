@@ -227,7 +227,7 @@ PD_sim = 1-(1-PD_MC_sim).*(1-PD_DOA_sim);
 PF_Theo = PF_DOA_Theo.*PF_MC_Theo + (1-PF_DOA_Theo).*PF_MC_Theo + (1-PF_MC_Theo).*PF_DOA_Theo;
 PD_Theo = 1-(1-PD_MC_Theo).*(1-PD_DOA_Theo);
 
-figure(1);
+figure(2);
 hold on;
 grid on;
 plot(PF_Theo(11,:),PD_Theo(11,:),'r-',LineWidth=1.5);% 0dB
