@@ -92,8 +92,8 @@ for i=1:l_snr
 end
 
 %% Simulation and theoretical analysis of scheme using Laplace AoA
-DOA_est_E_lap=load("Estimation_date\Eve_Laplace_3000_1.mat","theta_est","theta_true"); 
-DOA_est_A_lap=load("Estimation_date\Alice_Laplace_3000.mat","theta_est","theta_true");
+DOA_est_E_lap=load("Eve_Laplace_3000_1.mat","theta_est","theta_true"); 
+DOA_est_A_lap=load("Alice_Laplace_3000.mat","theta_est","theta_true");
 
 for i=1:l_snr
     [sigma_e,mu_e] = histfitlaplace(DOA_est_E_lap.theta_est(1,:,i).');
