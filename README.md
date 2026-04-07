@@ -16,4 +16,4 @@ Toolboxes: Signal Processing Toolbox, Optimization Toolbox (for SQP weight alloc
 **Usage**
 Clone this repository to your local machine. 
 Ensure all .mat files are in the same directory as the .m scripts. 
-Run LWC_Model_Validation.m or TTC_Model_Validation.m to generate the performance curves (corresponding to Fig. 5(a) and Fig.5(c)).
+Run LWC_Model_Validation.m or TTC_Model_Validation.m to generate the performance curves.
