@@ -1,6 +1,5 @@
 clear all;
 
-tic;
 SNR_dB=[-20:2:10]; 
 simulations=3000;
 thresh_gau=[1:1:20]; 
