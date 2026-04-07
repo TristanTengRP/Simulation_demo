@@ -18,8 +18,8 @@ PF_MC_sim=zeros(l_snr,l_thresh_MC);
 PD_MC_sim=zeros(l_snr,l_thresh_MC);
 
 %% Simulation and theoretical analysis of scheme using Gaussian DOA
-DOA_est_E=load("Estimation_date\Eve_Gaussian_5000_52.mat","theta_est","theta_true"); %load estimation of DOA under SNR=[0,30]dB
-DOA_est_A=load("Estimation_date\Alice_Gaussian_3000.mat","theta_est","theta_true");
+DOA_est_E=load("Eve_Gaussian_5000_52.mat","theta_est","theta_true"); %load estimation of DOA under SNR=[0,30]dB
+DOA_est_A=load("Alice_Gaussian_3000.mat","theta_est","theta_true");
 
 
 var_DOA_A = reshape(var(DOA_est_A.theta_est),l_snr,1);% The DOA variance of Alice;
@@ -150,8 +150,8 @@ for i=1:l_snr
 end
 
 %% Simulation and theoretical analysis of scheme using MC
-MC_est_E=load("Estimation_date\Eve_Gaussian_3000_MC_1.mat","MC_est","MC_true"); 
-MC_est_A=load("Estimation_date\Alice_Gaussian_3000.mat","MC_est","MC_true");
+MC_est_E=load("Eve_Gaussian_3000_MC_1.mat","MC_est","MC_true"); 
+MC_est_A=load("Alice_Gaussian_3000.mat","MC_est","MC_true");
 P = length(MC_est_A.MC_est(:,1,1)); 
 var_MC_A = 2.*(reshape(var(real(MC_est_A.MC_est(3,:,:))),l_snr,1)+reshape(var(real(MC_est_A.MC_est(3,:,:))),l_snr,1))./2;
 var_MC_E = 2.*(reshape(var(real(MC_est_E.MC_est(3,:,:))),l_snr,1)+reshape(var(real(MC_est_E.MC_est(3,:,:))),l_snr,1))./2;
