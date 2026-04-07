@@ -8,7 +8,7 @@ The provided scripts and datasets allow for the reproduction of the theoretical 
 
 2) **TTC_Model_Validation.m:** Verifies the authentication performance of the TTC-G schemes across various SNR regimes.
 
-3)**Fingerprint Datasets (.mat files):** The repository includes 5 .mat files containing estimated feature data used in our performance evaluation.
+3) **Fingerprint Datasets (.mat files):** The repository includes 5 .mat files containing estimated feature data used in our performance evaluation.
 
 **System Requirements**
 
