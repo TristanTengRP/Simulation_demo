@@ -3,6 +3,7 @@ This repository contains simulation scripts for validating the Linear Weighted C
 The provided scripts and datasets allow for the reproduction of the theoretical and simulation results concerning the Linear Weighted Combination (LWC) and Two-Threshold Combined (TTC) authentication schemes.
 
 **File Structure:**
+
 **LWC_Model_Validation.m:** Validates the theoretical detection and false alarm probabilities for the LWC scheme.
 **TTC_Model_Validation.m:** Verifies the authentication performance of the TTC-G schemes across various SNR regimes.
 
