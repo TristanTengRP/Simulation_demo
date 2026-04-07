@@ -284,7 +284,7 @@ for i=1:l_snr
     end
 end
 
-%% PF and PM for scheme using LMC.
+%% PF and PM for scheme using LWC.
 figure(3);
 hold on;
 grid on;
