@@ -28,7 +28,7 @@ mean_DOA_E=[52];
 var_DOA_c=(var_DOA_A.*var_DOA_E)./(var_DOA_E-var_DOA_A);
 m_theta=var_DOA_c.*((mean_DOA_A./var_DOA_A)-(mean_DOA_E./var_DOA_E));
 
-%% PD_simulation using Gaussian DOA
+%% PD_simulation using Gaussian AoA
 LRT_DOA_1=zeros(l_snr,simulations);
 LRT_DOA_PD=zeros(l_snr,simulations);
 Theta_delta_theata_pd=zeros(l_snr,simulations);
@@ -59,7 +59,7 @@ for i=1:l_snr
     end
 end
 
-%% PF simulation using Gaussian DOA
+%% PF simulation using Gaussian AoA
 LRT_DOA_2=zeros(l_snr,simulations);
 LRT_DOA_PF=zeros(l_snr,simulations);
 Theta_delta_theata_pf=zeros(l_snr,simulations);
@@ -79,7 +79,7 @@ for i=1:l_snr
     end
 end
 
-%% PF Theory using Gaussian DOA
+%% PF Theory using Gaussian AoA
 PF_DOA_Theo = zeros(l_snr,l_thresh_gau);
 lamda_0_theta = zeros(l_snr,1);
 for i=1:l_snr
