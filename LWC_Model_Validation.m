@@ -2,7 +2,7 @@ clear all;
 
 SNR_dB=[-20:2:10]; 
 simulations=3000;
-thresh_gau=[1:1:20]; % thresh of authentication 5:0.2:15 for ROC curve   
+thresh_gau=[1:1:20]; 
 thresh_lap=[0:0.1:2];
 thresh_MC=[1:1:20];
 l_snr=length(SNR_dB);
@@ -16,7 +16,7 @@ PD_lap_DOA_sim=zeros(l_snr,l_thresh_lap);
 PF_MC_sim=zeros(l_snr,l_thresh_MC);
 PD_MC_sim=zeros(l_snr,l_thresh_MC);
 
-%% Simulation and theoretical analysis of scheme using Gaussian DOA
+%% Simulation and theoretical analysis of scheme using Gaussian AoA
 DOA_est_E=load("Eve_Gaussian_5000_52.mat","theta_est","theta_true"); 
 DOA_est_A=load("Alice_Gaussian_3000.mat","theta_est","theta_true");
 
@@ -48,13 +48,13 @@ for i=1:l_snr
     end
 end
 
-%% PD Theory using Gaussian DOA
+%% PD Theory using Gaussian AoA
 PD_DOA_Theo = zeros(l_snr,l_thresh_gau);
 lamda_1_theta = zeros(l_snr,1);
 
 for i=1:l_snr
     for j=1:l_thresh_gau
-        lamda_1_theta(i) = ((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))).'*((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))); % H1条件下的中心尺度参数
+        lamda_1_theta(i) = ((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))).'*((mean_DOA_E-m_theta(i))./sqrt(var_DOA_E(i))); 
         PD_DOA_Theo(i,j)=1-ncx2cdf(2.*var_DOA_c(i)./var_DOA_E(i).*thresh_gau(j),length(mean_DOA_A),lamda_1_theta(i));
     end
 end
@@ -84,17 +84,17 @@ PF_DOA_Theo = zeros(l_snr,l_thresh_gau);
 lamda_0_theta = zeros(l_snr,1);
 for i=1:l_snr
     for j=1:l_thresh_gau
-        lamda_0_theta(i) = ((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))).'*((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))); % H1条件下的中心尺度参数
+        lamda_0_theta(i) = ((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))).'*((mean_DOA_A-m_theta(i))./sqrt(var_DOA_A(i))); 
         PF_DOA_Theo(i,j)=1-ncx2cdf(2.*var_DOA_c(i)./var_DOA_A(i).*thresh_gau(j),length(mean_DOA_E),lamda_0_theta(i));
     end
 end
 
 %% Simulation and theoretical analysis of scheme using MC
-MC_est_E=load("Eve_Gaussian_3000_MC_1.mat","MC_est","MC_true"); %load estimation of DOA under SNR=[0,30]dB
+MC_est_E=load("Eve_Gaussian_3000_MC_1.mat","MC_est","MC_true"); 
 MC_est_A=load("Alice_Gaussian_3000.mat","MC_est","MC_true");
 P = length(MC_est_A.MC_est(:,1,1)); % calculate the number of MC coefficients
-var_MC_A = 2.*(reshape(var(real(MC_est_A.MC_est(3,:,:))),l_snr,1)+reshape(var(real(MC_est_A.MC_est(3,:,:))),l_snr,1))./2;% The average MC estimation variance of Alice;
-var_MC_E = 2.*(reshape(var(real(MC_est_E.MC_est(3,:,:))),l_snr,1)+reshape(var(real(MC_est_E.MC_est(3,:,:))),l_snr,1))./2;% The average MC estimation variance of Eve;
+var_MC_A = 2.*(reshape(var(real(MC_est_A.MC_est(3,:,:))),l_snr,1)+reshape(var(real(MC_est_A.MC_est(3,:,:))),l_snr,1))./2;
+var_MC_E = 2.*(reshape(var(real(MC_est_E.MC_est(3,:,:))),l_snr,1)+reshape(var(real(MC_est_E.MC_est(3,:,:))),l_snr,1))./2;
 mean_MC_A = [0.167459095433972	0.0837295477169860];% mean of MC, Alice
 mean_MC_E = [0.666666666666667	0.333333333333333];% mean of MC, Eve 
 
