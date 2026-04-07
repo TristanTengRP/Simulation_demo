@@ -24,13 +24,13 @@ DOA_est_A=load("Alice_Gaussian_3000.mat","theta_est","theta_true");
 
 var_DOA_A = reshape(var(DOA_est_A.theta_est),l_snr,1);
 var_DOA_E = reshape(var(DOA_est_E.theta_est(:,:,1:16)),l_snr,1);
-mean_DOA_A=[55];% mean of DOA, Alice:[55]
-mean_DOA_E=[52];% mean of DOA, Eve:[52]
+mean_DOA_A=[55];
+mean_DOA_E=[52];
 
 var_DOA_c=(var_DOA_A.*var_DOA_E)./(var_DOA_E-var_DOA_A);
 m_theta=var_DOA_c.*((mean_DOA_A./var_DOA_A)-(mean_DOA_E./var_DOA_E));
 
-%% PD_simulation using Gaussian DOA
+%% PD_simulation using Gaussian AoA
 LRT_DOA_1=zeros(l_snr,simulations);
 LRT_DOA_PD=zeros(l_snr,simulations);
 Theta_delta_theata_pd=zeros(l_snr,simulations);
@@ -50,7 +50,7 @@ for i=1:l_snr
     end
 end
 
-%% PD Theory using Gaussian DOA
+%% PD Theory using Gaussian AoA
 PD_DOA_Theo = zeros(l_snr,l_thresh_gau);
 lamda_1_theta = zeros(l_snr,1);
 
@@ -61,7 +61,7 @@ for i=1:l_snr
     end
 end
 
-%% PF simulation using Gaussian DOA
+%% PF simulation using Gaussian AoA
 LRT_DOA_2=zeros(l_snr,simulations);
 LRT_DOA_PF=zeros(l_snr,simulations);
 Theta_delta_theata_pf=zeros(l_snr,simulations);
@@ -81,7 +81,7 @@ for i=1:l_snr
     end
 end
 
-%% PF Theory using Gaussian DOA
+%% PF Theory using Gaussian AoA
 PF_DOA_Theo = zeros(l_snr,l_thresh_gau);
 lamda_0_theta = zeros(l_snr,1);
 for i=1:l_snr
@@ -222,7 +222,7 @@ for i=1:l_snr
 end
 
 
-%% ROC curve for case 3: authentication scheme jointly using MC and Gaussian DOA
+%% ROC curve for the Authentication scheme jointly using MC and Gaussian DOA
 PF_sim = PF_DOA_sim.*PF_MC_sim + (1-PF_DOA_sim).*PF_MC_sim + (1-PF_MC_sim).*PF_DOA_sim;
 PD_sim = 1-(1-PD_MC_sim).*(1-PD_DOA_sim);
 PF_Theo = PF_DOA_Theo.*PF_MC_Theo + (1-PF_DOA_Theo).*PF_MC_Theo + (1-PF_MC_Theo).*PF_DOA_Theo;
